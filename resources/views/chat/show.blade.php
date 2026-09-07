@@ -4,7 +4,7 @@
 @section('content')
 @php $lawan = $chat->sender_id === auth()->id() ? $chat->receiver : $chat->sender; @endphp
 
-<div class="max-w-2xl mx-auto flex flex-col bg-white" style="height: calc(100vh - 0px)">
+<div class="max-w-2xl mx-auto flex flex-col bg-white" style="height: calc(100vh - 136px)">
 
     {{-- Header --}}
     <div class="bg-[#0D1B5E] text-white px-4 py-3 flex items-center gap-3 flex-shrink-0">
@@ -77,7 +77,7 @@
                     <p class="leading-relaxed">{{ $msg->message_text }}</p>
                 </div>
                 <p class="text-xs mt-1 text-gray-400 {{ $isMine ? 'text-right' : 'text-left' }}">
-                    {{ $msg->timestamp->format('H:i') }}
+                    {{ $msg->created_at->format('H:i') }}
                     @if($isMine)
                         <span class="{{ $msg->is_read ? 'text-blue-400' : 'text-gray-300' }}">
                             {{ $msg->is_read ? '✓✓' : '✓' }}

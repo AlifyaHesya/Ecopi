@@ -65,7 +65,7 @@
             <div class="flex flex-col items-end gap-1 flex-shrink-0">
                 <span class="text-xs text-gray-400">
                     @if($lastMsg)
-                        {{ $lastMsg->timestamp->isToday() ? $lastMsg->timestamp->format('H:i') : $lastMsg->timestamp->format('d/m') }}
+                        {{ $lastMsg->created_at->isToday() ? $lastMsg->created_at->format('H:i') : $lastMsg->created_at->format('d/m') }}
                     @endif
                 </span>
                 @if($unreadCount > 0)

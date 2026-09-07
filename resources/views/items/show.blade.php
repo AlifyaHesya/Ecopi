@@ -28,7 +28,6 @@
         <div>
             <h1 class="text-2xl font-bold text-gray-800 mb-4">{{ $item->nama_barang }}</h1>
 
-            {{-- Ukuran, Variasi, Lokasi --}}
             <div class="space-y-2 text-sm mb-4">
                 @if($item->ukuran)
                 <div class="flex items-center gap-2">
@@ -50,17 +49,16 @@
                 </div>
             </div>
 
-            {{-- Card Pendonor + Tombol Chat --}}
+            {{-- Card Pendonor --}}
             <div class="border rounded-xl p-4 mb-4 bg-white shadow-sm">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Pendonor</h3>
                 <div class="flex items-center justify-between">
-                    {{-- Avatar + Nama --}}
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-[#0D1B5E]">
-                            {{ strtoupper(substr($item->user->nama, 0, 2)) }}  {{-- ← pakai ->nama --}}
+                            {{ strtoupper(substr($item->user->nama, 0, 2)) }}
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">{{ $item->user->nama }}</h4>  {{-- ← pakai ->nama --}}
+                            <h4 class="font-bold text-gray-800">{{ $item->user->nama }}</h4>
                             <span class="text-xs text-emerald-600 flex items-center gap-1 font-medium">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -69,8 +67,6 @@
                             </span>
                         </div>
                     </div>
-
-                    {{-- Tombol Chat Pendonor --}}
                     @auth
                         @if($item->user_id !== auth()->id())
                             <a href="{{ route('chat.open', [$item->user_id, $item->id]) }}"
@@ -102,7 +98,7 @@
             </div>
             @endif
 
-            {{-- Tombol Pilih Barang / Edit / Login --}}
+            {{-- Tombol --}}
             @auth
                 @if(auth()->id() !== $item->user_id)
                     @if($item->status_barang === 'available')
@@ -116,7 +112,6 @@
                         </div>
                     @endif
                 @else
-                    {{-- Pemilik barang --}}
                     <div class="flex gap-3">
                         <a href="{{ route('items.edit', $item->id) }}"
                            class="flex-1 text-center border border-[#0D1B5E] text-[#0D1B5E] py-2 rounded-xl text-sm font-semibold hover:bg-blue-50 transition">
@@ -141,8 +136,38 @@
                     Login untuk Mengajukan
                 </a>
             @endauth
+        </div>
+    </div>
 
-        </div>{{-- end Info Barang --}}
-    </div>{{-- end grid --}}
+    {{-- Section Ulasan --}}
+    @if($item->reviews && $item->reviews->count() > 0)
+    <div class="mt-10">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">⭐ Ulasan Penerima</h2>
+        <div class="space-y-4">
+            @foreach($item->reviews as $review)
+            <div class="bg-white border rounded-xl p-4 shadow-sm">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm text-[#0D1B5E]">
+                        {{ strtoupper(substr($review->user->nama, 0, 2)) }}
+                    </div>
+                    <div>
+                        <p class="font-semibold text-sm">{{ $review->user->nama }}</p>
+                        <p class="text-xs text-gray-400">{{ $review->created_at->format('d M Y') }}</p>
+                    </div>
+                    <div class="ml-auto flex gap-0.5">
+                        @php $rating = (int) $review->rating; @endphp
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="{{ $i <= $rating ? 'text-yellow-400' : 'text-gray-300' }} text-lg">★</span>
+                        @endfor
+                    </div>
+                </div>
+                @if($review->komentar)
+                <p class="text-sm text-gray-600 mt-1">{{ $review->komentar }}</p>
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
 </div>
 @endsection

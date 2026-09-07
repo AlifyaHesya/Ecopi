@@ -31,7 +31,7 @@ class ReviewController extends Controller
             'komentar'     => 'nullable|string|max:500',
         ]);
 
-        $pengajuan = PengajuanDonasi::findOrFail($request->pengajuan_id);
+        $pengajuan = PengajuanDonasi::findOrFail($request->pengajuan_donasi_id);
 
         if ($pengajuan->user_id !== Auth::id()) {
             abort(403);
@@ -39,7 +39,7 @@ class ReviewController extends Controller
 
         // Simpan ulasan
         Review::create([
-            'pengajuan_donasi_id' => $request->pengajuan_id,
+            'pengajuan_donasi_id' => $request->pengajuan_donasi_id, // ← fix
             'user_id'      => Auth::id(),
             'rating'       => $request->rating,
             'komentar'     => $request->komentar,

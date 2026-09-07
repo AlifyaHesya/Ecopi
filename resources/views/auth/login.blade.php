@@ -2,13 +2,13 @@
 @section('title', 'Masuk')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-[#1E3A8A] to-[#0D1B5E] flex items-center justify-center p-6">
+<div class="min-h-screen bg-gradient-to-br from-[#1A1F8B] to-[#B1B1B1] flex items-center justify-center p-6">
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-4xl flex overflow-hidden">
 
         {{-- Sisi kiri - ilustrasi --}}
-        <div class="hidden md:flex w-1/2 bg-gradient-to-br from-blue-100 to-blue-200 items-center justify-center p-10">
+        <div class="hidden md:flex w-1/2 items-center justify-center p-10">
             <div class="text-center">
-                <div class="text-8xl mb-4">📦</div>
+                <img src="{{ asset('images/download.png') }}" alt="Ilustrasi Donasi" class="w-52 mx-auto mb-4">
                 <p class="text-[#0D1B5E] font-semibold text-lg">Barangmu Bisa Jadi</p>
                 <p class="text-green-600 font-bold text-xl">Manfaat Bagi Orang Lain</p>
             </div>

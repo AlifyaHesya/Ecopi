@@ -83,7 +83,6 @@ public function mulai(User $user, Item $item)
             'sender_id'    => Auth::id(),
             'message_text' => $request->message_text,
             'is_read'      => false,
-            'timestamp'    => now(),
         ]);
 
         return back();
@@ -93,7 +92,7 @@ public function mulai(User $user, Item $item)
     {
         $user = auth()->user();
 
-        $chats = \App\Models\Chat::where('sender_id', $user->id)
+        $chats = Chat::where('sender_id', $user->id)
             ->orWhere('receiver_id', $user->id)
             ->latest()
             ->get();

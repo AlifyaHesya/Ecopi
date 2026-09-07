@@ -14,7 +14,7 @@
 
         <form method="POST" action="{{ route('reviews.store') }}">
             @csrf
-            <input type="hidden" name="pengajuan_id" value="{{ $pengajuan->id }}">
+            <input type="hidden" name="pengajuan_donasi_id" value="{{ $pengajuan->id }}">
 
             {{-- Rating --}}
             <div class="mb-4">

@@ -16,7 +16,9 @@
             Donasikan Barangmu →
         </a>
     </div>
-    <div class="text-8xl">📦</div>
+    <div class="text-8xl">
+         <img src="{{ asset('images/ecopi-dashboard.png') }}" alt="Ilustrasi Donasi" class="w-72 mx-auto mb-6">
+    </div>
 </div>
 
 {{-- Filter Kategori --}}
